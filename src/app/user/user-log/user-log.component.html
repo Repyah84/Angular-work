@@ -1,0 +1,24 @@
+<div class="user-log">
+    <div class="container">
+        <form [formGroup]="appForm" (ngSubmit)="onSubmit()" class="form" >
+            <div class="form-control">
+                <div>
+                    <label for="email">Email</label>
+                    <span *ngIf="!appForm.get('email').valid && appForm.get('email').touched">  Email is not corect</span>
+                </div>
+                <input type="text"  id="email" name="email" formControlName="email">
+            </div>
+            <div class="form-control">
+                <div>
+                    <label for="password">Password</label>
+                    <span *ngIf="!appForm.get('password').valid && appForm.get('password').touched">  Password not corect</span>
+                </div>
+                <input type="password" id="password" name="password" formControlName="password">
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="btn btn-login">Login</button>
+                <button type="submit" class="btn btn-sing-in">Sing In</button>
+            </div>
+        </form>
+    </div>
+</div>

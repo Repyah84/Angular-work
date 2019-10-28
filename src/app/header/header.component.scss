@@ -1,0 +1,20 @@
+.header{
+   background: #CD5C5C;
+   padding: 25px 0;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+
+    .user{
+        display: flex;
+    }
+
+    .a{
+        display: block;
+        padding: 5px 10px;
+        color: #2F4F4F;
+        font-size: 18px;
+    }
+}
