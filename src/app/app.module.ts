@@ -9,8 +9,6 @@ import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './posts/post/post.component';
 import { UserComponent } from './user/user.component';
 import { UserLogComponent } from './user/user-log/user-log.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
-import { Interpolation } from '@angular/compiler';
 
 @NgModule({
   declarations: [
@@ -20,7 +18,6 @@ import { Interpolation } from '@angular/compiler';
     PostComponent,
     UserComponent,
     UserLogComponent,
-    UserProfileComponent
   ],
   imports: [
     BrowserModule,
