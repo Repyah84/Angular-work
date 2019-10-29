@@ -1,0 +1,25 @@
+<div class="creat-post">
+    <div class="container">
+        <form class="form" [formGroup] ="appForm" (ngSubmit)="onSubmit()">
+            <div class="form-control">
+                <div>
+                    <label for="title">Title</label>
+                    <span *ngIf="!appForm.get('title').valid && appForm.get('title').touched">NOT Title</span>
+                </div>
+                <input type="title" id="title" name="title" formControlName="title">
+            </div>
+
+            <div class="form-control">
+                <div>
+                    <label for="content">Content</label>
+                    <span *ngIf="!appForm.get('content').valid && appForm.get('content').touched">NOT Content</span>
+                </div>
+                <textarea type="text" id="content" name="content" formControlName="content"></textarea>
+            </div>
+
+            <div class="form-btn">
+                <button [disabled]="!appForm.valid" class="btn btn-post" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+</div>

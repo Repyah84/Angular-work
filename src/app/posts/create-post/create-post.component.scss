@@ -1,0 +1,28 @@
+.form{
+    max-width: 600px;
+    margin: 0 auto;
+
+    .form-control{
+        padding: 20px 0;
+    }
+
+    span{
+        margin-left: 10px;
+        color: red;
+    }
+
+    input,textarea{
+        width: 100%;
+        padding: 5px;
+    }
+
+    .form-btn{
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn{
+        padding: 10px 30px;
+    }
+}

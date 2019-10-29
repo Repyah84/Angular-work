@@ -3,14 +3,11 @@
         <div class="posts-wraper">
             <div class="post">
                 <div class="post-link" *ngFor="let item of postsServ.posts; let index = index">
-                    <a class="a" [routerLink]="['/posts', index]">
-                        <p>N: {{ index }}</p>
+                    <a class="a" [routerLink]="['/post', index]">
+                        <p>N: {{ index + 1}}</p>
                         <h2>{{ item.title }}</h2>
                     </a>
                 </div>
-            </div>
-            <div class="post">
-                <router-outlet></router-outlet>
             </div>
         </div>
     </div>

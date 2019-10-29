@@ -1,1 +1,53 @@
-<p>user works!</p>
+<div class="prof">
+   <div class="container">
+      <div class="photo">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAASFBMVEX///+kqa+gpqyqr7Seo6r5+vqfpKuzt7zo6eqcoajCxcne4OLLztG7v8Pv8PHW2Nvi4+X19vaxtbrBxMjt7u/Iy8+prbPS1Nej01dWAAAFKklEQVR4nO2cWbujIAyGj4jghla7/f9/Ot1YtJtYETPP996ci9ExaUIIEPL3BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEOXV1XbVlXexJYkBHktmRDsxuVvX+exJVqUQ5lwlgxgPCn/GyV3/Vg9rWRaxZZtCfKUv1Lvjkh3seX7lUwV7/W7wlUWW8af2CUv/XPgq4yyGesvBrxTHGPLORslng12mzHGo1HFlnQmaqiJ4Incn9v2XMoTH2rJaKo4UJDxvnUyma6Vwv1nklYshavf/ilRa0p3lmRlDBl/onVmQSG7V490ynmGt2tL+CONK/zbzKVy7MyJpeOp9b/0pQHvdKn11NN60i3A2QjO+s9P9vbJ8zqyLUImpiroqigI5W+l9b2vUmfWn+nkNp0x4ZTwYYMSJ2PEWpuQ1VMeP/s9vgV8w+PJvBBWrsXYaScVE9dFO+2nnMi+xl57XTr1DT17UsndTGycnIi1jJSbmtjIJofGzLjph/xnO1QPgzA5/R2pfxQSm2/Hh4bCIwvTEwaN+UJqDT0Cow6/NBb7enbzyVA6PRC/prFbQM+Ghcc7mQ6mJJZQegeR+bxEKqvRGgqfl8ycTyH5NnObz0ukNNRDymcc2uSbgobaHD75idkUIBFp1Iz5sCE1W5icxmMH1GR6JGb8doa05YxMLx4Hs+8y/R39ho9nR8SIO/noM9eBxmuGiYfyXj6ZYyqPBVdMdNiYfBRh8u7puwKRMQJPNIkxoSCxxP9ztqL4pJGYm1+ExFxxxUbTSeHUPExlM/HPLvMnWcWehpNIaO5YI4qvpy21IGhC1y78y95SbX4MOqPwij1ATPjHfezSDllGJZDeqRzJP8wZ0h40kitV2Fsrsnf7vJVTN0TLR284NQgJ719MjLverbiZfIqzHezp9U3HtB0Ms+48KjulsHsxphtokAhxOlZ503VN3h5PYlTURyvKaLpxcSljgl8Q4+JERlTBi6P2I1VeI3qKLvqg/FDjbYboPraUP1E9lcuOeDuVkCEriw86sqIk7KGaRr2+bnEtO1XEChLf0dWJeFKSiaSmGkJfkR9TrmvYrzefeH+ktFaaRnaZ6ZVMU6mObf4fjD4AAAAAAABAQJqqVrJPT+kcTmkvVV1td1WcVUrw53vMflze50xVW1xd5eppH3S+mkKorS2Q8ze9L+Yryfst6djICfui3nC5mRFZL2w/DePbKHPL5FPrhMUQcgMh5/C9uccPsCS6p+5GI/C6U/holjQDwZ+bZkQOOEMFGSvkuTpk8zlUZ1kMteSHmArmroJMqGVOWSo5CF0ioqN2bozharlN+kYNfCNeuHGqEdhp2fGSn5z/O1rZ6dGphln+Lr1zuhqr/NspQXzf3OMHWtuDKdLdUtvdY1odqTe2sCqOn7YiqAVvn+CBf8PP2FES7mqrHekRaqZM95ygHmRGQoTiU/PtoOXnjW9VfIhPh71+barii7Wnfdu/JOx34t3FMJc+Q7fN8b+BswwmIw3eoiufcVFsCUyHlvBR3ETTdVdRehiu0NvJuOm6BXDmKmz4XEPnTis3yppznXkmeZyeGbOupM8jUs+MWY0T5mHa86x7k31W8wsC34rz1RVHhAM0XBJoGAZouCTQMAzQcEmgYRig4ZJAwzDwCBqu256nfyi4xhafvrS/7gr4cfBVrHEk9KiGCHbC9YZjwRgr1mmoev/W6h3bd0ru1zoPypXcXK0iAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABOIfEJUm1PN+qUcAAAAASUVORK5CYII=" alt="">
+      </div>
+       <form class="form" [formGroup]="appForm" (ngSubmit)="onSubmit()">
+          <div class="form-control">
+            <div>
+              <label for="name">Name: {{'Namme'}}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'" type="text" id="name" name="name" formControlName="name">
+          </div>
+          
+          <div class="form-control">
+            <div>
+              <label for="second-name">Second Name: {{'Second Name'}}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'"type="text" id="second-name" name="second-name" formControlName="second-name">
+          </div>
+
+          <div class="form-control">
+            <div>
+              <label for="age">Age: {{'Age'}}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'"type="number" id="age" name="age" formControlName="age">
+          </div>
+
+          <div class="form-control">
+            <div>
+              <label for="email">Email: {{'Email'}}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'"type="text" id="email" name="email" formControlName="email">
+          </div>
+
+          <div class="form-control">
+            <div>
+              <label for="password">Password: {{'Password'}}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'"type="text" id="passvord" name="passvord" formControlName="password">
+          </div>
+
+          <div class="form-btn">
+            <button type="submit" class="btn btn-save">{{ btnValue }}</button>
+            <button type="button" class="btn" routerLink="/posts">Back to post</button>
+          </div>
+        </form>
+    </div>
+</div>
