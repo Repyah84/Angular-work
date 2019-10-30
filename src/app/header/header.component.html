@@ -7,7 +7,7 @@
             </div>
             <div class="user">
                 <a class="a" [routerLink]="['/user']">Your profile</a>
-                <a class="a" [routerLink]="['/user-log']">Logout</a>
+                <a class="a" [routerLink]="['/user-log']" [queryParams]="{login: false}">Logout</a>
             </div>
         </div>
     </div>

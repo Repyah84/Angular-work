@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+import { PostsService } from 'src/app/posts/post.seervice';
 
 @Component({
   selector: 'app-user-log',
@@ -14,12 +15,16 @@ export class UserLogComponent implements OnInit {
 
   constructor(
     private authServ: AuthService,
+    private postServ: PostsService,
     private router: Router
     ) { }
 
   ngOnInit() {
+    this.authServ.logout();
 
-    this.authServ.logout()
+    if(!this.postServ.postsValue){
+      this.postServ.getLoadPosts()
+    }
 
     this.appForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
@@ -30,8 +35,8 @@ export class UserLogComponent implements OnInit {
 
   onSubmit(){
     this.authServ.login();
-    this.router.navigate(['/posts'])
-    console.log(this.appForm)
+    this.router.navigate(['/posts']);
+    console.log(this.appForm);
   }
 
 }

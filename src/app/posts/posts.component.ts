@@ -9,9 +9,17 @@ import { PostsService } from './post.seervice';
 })
 export class PostsComponent implements OnInit {
 
-  constructor(private postsServ: PostsService) { }
+  loadPosts = true;
+
+  constructor(
+    private postsServ: PostsService,
+    ) { }
 
   ngOnInit() {
+    if(this.postsServ.postsValue){
+      this.postsServ.getLoadPosts();
+      this.postsServ.loadPosts();
+    }
   }
 
 }

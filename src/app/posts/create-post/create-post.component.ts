@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PostsService } from '../post.seervice';
+import { PostsService, Post } from '../post.seervice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
@@ -11,7 +12,10 @@ export class CreatePostComponent implements OnInit {
 
   appForm: FormGroup;
 
-  constructor(private postServ: PostsService) { }
+  constructor(
+    private postServ: PostsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.appForm = new FormGroup({
@@ -21,8 +25,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit(){
-    this.postServ.makePost(this.appForm.value.title, this.appForm.value.content)
+    const post: Post = {
+      title: this.appForm.value.title, 
+      content: this.appForm.value.content
+    }
+    this.postServ.makePost(post);
     console.log(this.appForm);
     this.appForm.reset();
+    this.router.navigate(['/posts']);
   }
 }
