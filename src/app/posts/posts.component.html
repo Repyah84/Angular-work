@@ -1,10 +1,12 @@
 <div class="posts">
-    <div class="container">
+    <span *ngIf="postsServ.loadSpiner">Loading...</span>
+    <div *ngIf="!postsServ.loadSpiner" class="container">
         <div class="post-link" *ngFor="let item of postsServ.posts; let index = index">
-            <a class="a" [routerLink]="['/post', index]">
+            <a class="a" [routerLink]="['/post', item.id]">
                 <p>N: {{ index + 1}}</p>
                 <h2>{{ item.title }}</h2>
             </a>
+            <button class="btn btn-delite" (click)="onDelite(item.id)">Delite Post</button>
         </div>
     </div>
 </div>

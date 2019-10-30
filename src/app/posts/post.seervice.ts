@@ -14,10 +14,9 @@ export class PostsService {
 
     postsValue = true;
 
-    posts: Post[] = [
-        // {title: 'apple', content: 'some text'},
-        // {title: 'bread', content: 'some text'}
-    ]
+    loadSpiner = null;
+
+    posts: Post[] = [];
 
     constructor(private http: HttpClient){}
 
@@ -36,6 +35,7 @@ export class PostsService {
     }
     
     loadPosts(){
+        this.loadSpiner = true;  
         this.http.get<{[key: string]: Post}>('https://angular-progect.firebaseio.com/posts.json')
         .pipe(
             map(responsePost => {
@@ -50,7 +50,16 @@ export class PostsService {
         )
         .subscribe(response => {
             console.log(response);
+            this.loadSpiner = false;
             this.posts = response;
+        })
+    }
+
+    delitePost(id: string){
+        this.http.delete(`https://angular-progect.firebaseio.com/posts/${id}.json`)
+        .subscribe(() => {
+            const deliteElem = this.posts.findIndex(item => item.id === id)
+            this.posts.splice(deliteElem, 1);
         })
     }
     
@@ -62,8 +71,8 @@ export class PostsService {
         this.posts.push(post)
     }
     
-    getPost(id: number){
-        return this.posts[id]
+    getPost(id: string){
+        return this.posts.find(item => item.id  === id)
     }
-    
+
 }

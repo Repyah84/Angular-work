@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService, Post } from '../post.seervice';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -13,13 +13,19 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postServ: PostsService,
-    private route: ActivatedRoute
-    ) { }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe( (params: Params) => {
-      this.post = this.postServ.getPost(+params.id)
+    this.route.params.subscribe((params: Params) => {
+      this.post = this.postServ.getPost(params.id)
     })
+  }
+
+  onDelite(id: string){
+    this.postServ.delitePost(id);
+    this.router.navigate(['/posts']);
   }
 
 }

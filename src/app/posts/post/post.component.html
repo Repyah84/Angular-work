@@ -2,5 +2,9 @@
     <div class="container">
         <h3>{{ post.title }}</h3>
         <p>{{ post.content }}</p>
+        <div class="btn-wraper">
+            <button class="btn btn-back" routerLink="/posts">Back to Posts</button>
+            <button class="btn btn-delite" (click)="onDelite(post.id)">Delite Post</button>
+        </div>
     </div>
 </div>

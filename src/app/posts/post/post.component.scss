@@ -1,3 +1,19 @@
 .post{
     background: seagreen;
 }
+
+.btn{
+    color: #ffffff;
+    padding: 10px;
+    background: cornflowerblue;
+
+    &-wraper{
+        display: flex;
+        justify-content: space-between ;
+    }
+
+    &-delite{
+        background: #696969;
+    }
+    
+}

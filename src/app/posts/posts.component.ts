@@ -13,13 +13,17 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private postsServ: PostsService,
-    ) { }
+  ) {}
 
   ngOnInit() {
     if(this.postsServ.postsValue){
       this.postsServ.getLoadPosts();
       this.postsServ.loadPosts();
     }
+  }
+
+  onDelite(id: string){
+    this.postsServ.delitePost(id)
   }
 
 }
