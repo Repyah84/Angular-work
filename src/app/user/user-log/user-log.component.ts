@@ -50,6 +50,7 @@ export class UserLogComponent implements OnInit {
 
     const email = this.appForm.value.email;
     const password = this.appForm.value.password;
+    
     let authOs: Observable<string | AuthRsponceData>;
     
     if(this.isLoginMode){
@@ -59,6 +60,7 @@ export class UserLogComponent implements OnInit {
     }
 
     authOs.subscribe(response => {
+
       console.log(response);
       this.isEroosMasege = false;
       this.authServ.login();

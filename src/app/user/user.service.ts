@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
+
+import { User } from '../auth/user.module';
 
 
 export interface AuthRsponceData {
@@ -16,6 +18,8 @@ export interface AuthRsponceData {
 @Injectable({providedIn:'root'})
 export class UserService {
 
+    user = new BehaviorSubject<User>(null);
+
     constructor(private http: HttpClient){}
 
     onSingUp(email: string, password: string){
@@ -26,7 +30,17 @@ export class UserService {
                 password,
                 returnSecureToken: true
             }
-        ).pipe(catchError(this.handlerError));
+        ).pipe(
+            catchError(this.handlerError),
+            tap((resData: any) => {
+                this.hendlerAutonotification(
+                    resData.email,
+                    resData.localId,
+                    resData.idToken,
+                    +resData.expiresIn
+                )
+            })
+        );
     }
 
     onLogin(email: string, password: string){
@@ -37,7 +51,29 @@ export class UserService {
                 password,
                 returnSecureToken: true
             }
-        ).pipe(catchError(this.handlerError));
+        ).pipe(
+            catchError(this.handlerError), 
+            tap((resData: any) => {
+                this.hendlerAutonotification(
+                    resData.email,
+                    resData.localId,
+                    resData.idToken,
+                    +resData.expiresIn
+                )
+            })
+        );
+    }
+
+
+    private hendlerAutonotification(
+        email: string,
+        localId: string,
+        idToken: string,
+        expiresIn: number
+    ){
+        const epirationData = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(email, localId, idToken, epirationData);
+        this.user.next(user);
     }
 
     private handlerError(errorRes: HttpErrorResponse){
