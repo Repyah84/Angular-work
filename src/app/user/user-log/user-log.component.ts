@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth.service';
 import { Router} from '@angular/router';
-import { PostsService } from 'src/app/posts/post.seervice';
+import { Observable } from 'rxjs';
+
+import { AuthService } from '../../auth.service';
+import { PostsService } from '../../posts/post.seervice';
+import { UserService, AuthRsponceData } from '../user.service';
 
 @Component({
   selector: 'app-user-log',
@@ -13,11 +16,18 @@ export class UserLogComponent implements OnInit {
 
   appForm: FormGroup;
 
+  error: string = '';
+
+  isEroosMasege = false;
+
+  isLoginMode = true;
+
   constructor(
     private authServ: AuthService,
     private postServ: PostsService,
+    private userSer: UserService,
     private router: Router
-    ) { }
+  ) {}
 
   ngOnInit() {
     this.authServ.logout();
@@ -34,9 +44,33 @@ export class UserLogComponent implements OnInit {
   }
 
   onSubmit(){
-    this.authServ.login();
-    this.router.navigate(['/posts']);
+    if(!this.appForm.valid) return
+
+    console.log(this.isLoginMode);
+
+    const email = this.appForm.value.email;
+    const password = this.appForm.value.password;
+    let authOs: Observable<string | AuthRsponceData>;
+    
+    if(this.isLoginMode){
+      authOs = this.userSer.onLogin(email, password)
+    }else{
+      authOs = this.userSer.onSingUp(email, password)
+    }
+
+    authOs.subscribe(response => {
+      console.log(response);
+      this.isEroosMasege = false;
+      this.authServ.login();
+      this.router.navigate(['/posts']);
+    }, errorMessage => {
+      this.isEroosMasege = true;
+      this.error = errorMessage;
+      this.authServ.logout();
+    })
+    
     console.log(this.appForm);
+
   }
 
 }

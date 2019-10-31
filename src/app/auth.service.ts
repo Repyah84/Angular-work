@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    inOuth = false
+    inOuth = false;
 
     login(){
         this.inOuth = true;

@@ -1,5 +1,8 @@
 <div class="user-log">
     <div class="container">
+        <div class="error-massege" *ngIf="isEroosMasege">
+            <h3>{{error}}</h3>
+        </div>
         <form [formGroup]="appForm" (ngSubmit)="onSubmit()" class="form" >
             <div class="form-control">
                 <div>
@@ -16,8 +19,11 @@
                 <input type="password" id="password" name="password" formControlName="password">
             </div>
             <div class="form-btn">
-                <button type="submit" class="btn btn-login">Login</button>
-                <button type="submit" class="btn btn-sing-in">Sing In</button>
+                <button type="submit" class="btn btn-login" 
+                    >{{ isLoginMode ? 'Login' : 'Sing up' }}</button>
+                <button type="button" class="btn btn-login-module" 
+                    (click)="isLoginMode = !isLoginMode"
+                    >{{ isLoginMode ? 'To Sing Up' : 'To Login' }}</button>
             </div>
         </form>
     </div>
