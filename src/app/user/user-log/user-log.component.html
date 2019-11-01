@@ -18,6 +18,13 @@
                 </div>
                 <input type="password" id="password" name="password" formControlName="password">
             </div>
+            <div *ngIf="!isLoginMode" class="form-control">
+                <div>
+                    <label for="text">User Name</label>
+                    <span *ngIf="!appForm.get('user-name').valid && appForm.get('user-name').touched"> Add User name </span>
+                </div>
+                <input type="user-name" id="user-name" name="user-name" formControlName="user-name">
+            </div>
             <div class="form-btn">
                 <button type="submit" class="btn btn-login" 
                     >{{ isLoginMode ? 'Login' : 'Sing up' }}</button>

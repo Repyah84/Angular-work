@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../auth.service';
-import { PostsService } from '../../posts/post.seervice';
+import { PostsService, initUser } from '../../posts/post.seervice';
 import { UserService, AuthRsponceData } from '../user.service';
 
 @Component({
@@ -38,7 +38,8 @@ export class UserLogComponent implements OnInit {
 
     this.appForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      'user-name': new FormControl('User', Validators.required)
     })
 
   }
@@ -54,9 +55,9 @@ export class UserLogComponent implements OnInit {
     let authOs: Observable<string | AuthRsponceData>;
     
     if(this.isLoginMode){
-      authOs = this.userSer.onLogin(email, password)
+      authOs = this.userSer.onLogin(email, password);
     }else{
-      authOs = this.userSer.onSingUp(email, password)
+      authOs = this.userSer.onSingUp(email, password);
     }
 
     authOs.subscribe(response => {
@@ -64,6 +65,14 @@ export class UserLogComponent implements OnInit {
       console.log(response);
       this.isEroosMasege = false;
       this.authServ.login();
+      if(!this.isLoginMode){
+        const user: initUser = {
+          userId: this.userSer.userId,
+          userName: this.appForm.value['user-name'],
+        }
+
+        this.postServ.createUser(user);
+      }
       this.router.navigate(['/posts']);
     }, errorMessage => {
       this.isEroosMasege = true;
