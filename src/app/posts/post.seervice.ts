@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, take, exhaustMap, filter } from 'rxjs/operators';
+import { UserService } from '../user/user.service';
 
 
 export interface Post {
     title: string,
     content: string,
+    userId?: string,
     id?: string
 }
 
@@ -18,40 +20,39 @@ export class PostsService {
 
     posts: Post[] = [];
 
-    constructor(private http: HttpClient){}
+    constructor(
+        private http: HttpClient,
+        private userServ: UserService
+    ){}
 
     makePost(post: Post){
         this.http.post<Post>('https://angular-progect.firebaseio.com/posts.json', post)
-        .pipe(
-            map((response: any ) => {
-                return {...post, id: response.name}
-            })
-        )
-        .subscribe(post => {
-            this.addPost(post);
-            console.log(post)
-        });
-        console.log(this.posts)
+            .pipe(
+                map((response: any ) => {return {...post, id: response.name}})
+            )
+            .subscribe(post => {
+                this.addPost(post);
+            });
     }
     
     loadPosts(){
-        this.loadSpiner = true;  
+        this.loadSpiner = true;
         this.http.get<{[key: string]: Post}>('https://angular-progect.firebaseio.com/posts.json')
-        .pipe(
-            map(responsePost => {
-                const arreyPosts: Post[] = [];
-                for(const key in responsePost){
-                    if(responsePost.hasOwnProperty(key)){
-                        arreyPosts.push({...responsePost[key], id:key})
+            .pipe(
+                map(responsePost => {
+                    const arreyPosts: Post[] = [];
+                    for(const key in responsePost){
+                        if(responsePost.hasOwnProperty(key)){
+                            arreyPosts.push({...responsePost[key], id:key})
+                        }
                     }
-                }
-                return arreyPosts;
-            })
-        )
-        .subscribe(response => {
-            console.log(response);
-            this.loadSpiner = false;
-            this.posts = response;
+                    return arreyPosts;
+                })
+            )   
+            .subscribe(response => {
+                // this.posts = response;
+                this.posts = response.filter(responsePost => responsePost.userId === this.userServ.userId);
+                this.loadSpiner = false;
         })
     }
 
@@ -64,7 +65,7 @@ export class PostsService {
     }
     
     getLoadPosts(){
-        this.postsValue = !this.postsValue
+        this.postsValue = !this.postsValue;
     }
 
     addPost(post: Post){
