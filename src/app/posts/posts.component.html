@@ -6,7 +6,9 @@
                 <p>N: {{ index + 1}}</p>
                 <h2>{{ item.title }}</h2>
             </a>
-            <button class="btn btn-delite" (click)="onDelite(item.id)">Delite Post</button>
+            <div class="post-btn">
+                <button class="btn btn-delite" (click)="onDelite(item.id)">Delite Post</button>
+            </div>
         </div>
     </div>
 </div>

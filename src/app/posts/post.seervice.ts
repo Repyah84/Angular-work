@@ -23,33 +23,22 @@ export class PostsService {
 
     posts: Post[] = [];
 
-    idUser = '';
-
     constructor(
         private http: HttpClient,
         private userServ: UserService
     ){}
 
-    createUser(user: initUser ){
-        this.http.post<initUser>('https://angular-progect.firebaseio.com/users.json', user)
-        .pipe(
-            map((response: any) => {
-                let getUserId: string;
-                for(const key in response){
-                    if(response.hasOwnProperty(key)){
-                        getUserId = response.name
-                    }
-                }
-                return getUserId
-            })
-        )
-        .subscribe(response => {
-            this.idUser = response
-        })
+
+
+    createUser(user: initUser, userId = this.userServ.userId ){
+        this.http.post<initUser>(`https://angular-progect.firebaseio.com/USER_${userId}.json`, user)
     }
 
-    makePost(post: Post){
-        this.http.post<Post>(`https://angular-progect.firebaseio.com/users/-Lsb_48jYf0YDpSiOEf_/posts.json`, post)
+
+    
+
+    makePost(post: Post, userId = this.userServ.userId){
+        this.http.post<Post>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`, post)
             .pipe(
                 map((response: any ) => {
                     console.log('!!!!!!!!!!!!!!!',response)
@@ -59,10 +48,13 @@ export class PostsService {
                 this.addPost(post);
             });
     }
+
+
+
     
-    loadPosts(){
+    loadPosts(userId = this.userServ.userId){
         this.loadSpiner = true;
-        this.http.get<{[key: string]: Post}>('https://angular-progect.firebaseio.com/posts.json')
+        this.http.get<{[key: string]: Post}>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`)
             .pipe(
                 map(responsePost => {
                     const arreyPosts: Post[] = [];
@@ -80,13 +72,18 @@ export class PostsService {
         })
     }
 
-    delitePost(id: string){
-        this.http.delete(`https://angular-progect.firebaseio.com/posts/${id}.json`)
+
+
+    delitePost(id: string, userId = this.userServ.userId){
+        this.http.delete(`https://angular-progect.firebaseio.com/USER_${userId}/posts/${id}.json`)
         .subscribe(() => {
             const deliteElem = this.posts.findIndex(item => item.id === id)
             this.posts.splice(deliteElem, 1);
         })
     }
+
+
+
     
     getLoadPosts(){
         this.postsValue = !this.postsValue;

@@ -63,8 +63,10 @@ export class UserLogComponent implements OnInit {
     authOs.subscribe(response => {
 
       console.log(response);
+
       this.isEroosMasege = false;
       this.authServ.login();
+
       if(!this.isLoginMode){
         const user: initUser = {
           userId: this.userSer.userId,
@@ -73,6 +75,7 @@ export class UserLogComponent implements OnInit {
 
         this.postServ.createUser(user);
       }
+      
       this.router.navigate(['/posts']);
     }, errorMessage => {
       this.isEroosMasege = true;
