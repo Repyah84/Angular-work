@@ -5,7 +5,7 @@ import { PostComponent } from './posts/post/post.component';
 import { UserComponent } from './user/user.component';
 import { UserLogComponent } from './user/user-log/user-log.component';
 import { PostsComponent } from './posts/posts.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 
 

@@ -18,12 +18,39 @@
                 </div>
                 <input type="password" id="password" name="password" formControlName="password">
             </div>
-            <div *ngIf="!isLoginMode" class="form-control">
-                <div>
-                    <label for="text">User Name</label>
-                    <span *ngIf="!appForm.get('user-name').valid && appForm.get('user-name').touched"> Add User name </span>
+
+            <div *ngIf="!isLoginMode" class="user-sing-up">
+                <div class="form-control">
+                    <div>
+                        <label for="user-name">User Name</label>
+                        <span *ngIf="!appForm.get('user-name').valid && appForm.get('user-name').touched"> Add User name </span>
+                    </div>
+                    <input type="text" id="user-name" name="user-name" formControlName="user-name">
                 </div>
-                <input type="user-name" id="user-name" name="user-name" formControlName="user-name">
+                    
+                <div class="form-control">
+                    <div>
+                        <label for="age">Age: {{'Age'}}</label>
+                        <!-- <span>Same Text</span> -->
+                    </div>
+                    <input type="number" id="age" name="age" formControlName="age">
+                </div>
+                
+                <div class="form-control">
+                    <div>
+                        <label for="height">Height: {{'Height'}}</label>
+                        <!-- <span>Same Text</span> -->
+                    </div>
+                    <input type="number" id="height" name="height" formControlName="height">
+                </div>
+        
+                <div class="form-control">
+                    <div>
+                        <label for="weight">Weight: {{'Weight'}}</label>
+                        <!-- <span>Same Text</span> -->
+                    </div>
+                    <input type="number" id="weight" name="weight" formControlName="weight">
+                </div>
             </div>
             <div class="form-btn">
                 <button type="submit" class="btn btn-login" 

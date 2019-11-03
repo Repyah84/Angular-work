@@ -6,7 +6,7 @@
        <form class="form" [formGroup]="appForm" (ngSubmit)="onSubmit()">
           <div class="form-control">
             <div>
-              <label for="name">Name: {{'Namme'}}</label>
+              <label for="name">Name: {{ userInfo?.userName }}</label>
               <span>Same Text</span>
             </div>
             <input *ngIf="btnValue !== 'Change'" type="text" id="name" name="name" formControlName="name">
@@ -14,34 +14,26 @@
           
           <div class="form-control">
             <div>
-              <label for="second-name">Second Name: {{'Second Name'}}</label>
+              <label for="age">Age: {{ userInfo?.userAge }}</label>
               <span>Same Text</span>
             </div>
-            <input *ngIf="btnValue !== 'Change'"type="text" id="second-name" name="second-name" formControlName="second-name">
+            <input *ngIf="btnValue !== 'Change'" type="number" id="age" name="age" formControlName="age">
+          </div>
+          
+          <div class="form-control">
+            <div>
+              <label for="height">Height: {{ userInfo?.userHeight }}</label>
+              <span>Same Text</span>
+            </div>
+            <input *ngIf="btnValue !== 'Change'" type="number" id="height" name="height" formControlName="height">
           </div>
 
           <div class="form-control">
             <div>
-              <label for="age">Age: {{'Age'}}</label>
+              <label for="weight">Weight: {{ userInfo?.userWeight  }}</label>
               <span>Same Text</span>
             </div>
-            <input *ngIf="btnValue !== 'Change'"type="number" id="age" name="age" formControlName="age">
-          </div>
-
-          <div class="form-control">
-            <div>
-              <label for="email">Email: {{'Email'}}</label>
-              <span>Same Text</span>
-            </div>
-            <input *ngIf="btnValue !== 'Change'"type="text" id="email" name="email" formControlName="email">
-          </div>
-
-          <div class="form-control">
-            <div>
-              <label for="password">Password: {{'Password'}}</label>
-              <span>Same Text</span>
-            </div>
-            <input *ngIf="btnValue !== 'Change'"type="text" id="passvord" name="passvord" formControlName="password">
+            <input *ngIf="btnValue !== 'Change'" type="number" id="weight" name="weight" formControlName="weight">
           </div>
 
           <div class="form-btn">
@@ -49,5 +41,5 @@
             <button type="button" class="btn" routerLink="/posts">Back to post</button>
           </div>
         </form>
-    </div>
+      </div>
 </div>

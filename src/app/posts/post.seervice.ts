@@ -3,11 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 
-export interface initUser {
-    userId: string,
-    userName: string,
-}
-
 export interface Post {
     title: string,
     content: string,
@@ -21,6 +16,8 @@ export class PostsService {
 
     loadSpiner = null;
 
+    userInfo: Post;
+
     posts: Post[] = [];
 
     constructor(
@@ -29,26 +26,19 @@ export class PostsService {
     ){}
 
 
-
-    createUser(user: initUser, userId = this.userServ.userId ){
-        this.http.post<initUser>(`https://angular-progect.firebaseio.com/USER_${userId}.json`, user)
-    }
-
-
     
-
+    
     makePost(post: Post, userId = this.userServ.userId){
         this.http.post<Post>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`, post)
-            .pipe(
-                map((response: any ) => {
-                    console.log('!!!!!!!!!!!!!!!',response)
-                    return {...post, id: response.name}})
-            )
-            .subscribe(post => {
-                this.addPost(post);
-            });
-    }
-
+        .pipe(
+            map((response: any ) => {
+                console.log('!!!!!!!!!!!!!!!', response)
+                return {...post, id: response.name}})
+                )
+                .subscribe(post => {
+                    this.addPost(post);
+                });
+            }
 
 
     

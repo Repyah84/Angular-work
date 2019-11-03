@@ -3,9 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthService } from '../../auth.service';
-import { PostsService, initUser } from '../../posts/post.seervice';
-import { UserService, AuthRsponceData } from '../user.service';
+import { PostsService } from '../../posts/post.seervice';
+import { UserService, AuthRsponceData, initUser} from '../user.service';
 
 @Component({
   selector: 'app-user-log',
@@ -23,14 +22,14 @@ export class UserLogComponent implements OnInit {
   isLoginMode = true;
 
   constructor(
-    private authServ: AuthService,
     private postServ: PostsService,
     private userSer: UserService,
     private router: Router
   ) {}
 
+
   ngOnInit() {
-    this.authServ.logout();
+    this.userSer.onLogout();
 
     if(!this.postServ.postsValue){
       this.postServ.getLoadPosts()
@@ -39,10 +38,16 @@ export class UserLogComponent implements OnInit {
     this.appForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'user-name': new FormControl('User', Validators.required)
+      'user-name': new FormControl('User', Validators.required),
+      'age': new FormControl(null),
+      'height': new FormControl(null),
+      'weight': new FormControl(null)
     })
 
   }
+
+
+
 
   onSubmit(){
     if(!this.appForm.valid) return
@@ -53,6 +58,7 @@ export class UserLogComponent implements OnInit {
     const password = this.appForm.value.password;
     
     let authOs: Observable<string | AuthRsponceData>;
+
     
     if(this.isLoginMode){
       authOs = this.userSer.onLogin(email, password);
@@ -65,22 +71,23 @@ export class UserLogComponent implements OnInit {
       console.log(response);
 
       this.isEroosMasege = false;
-      this.authServ.login();
 
       if(!this.isLoginMode){
         const user: initUser = {
           userId: this.userSer.userId,
           userName: this.appForm.value['user-name'],
+          userAge: this.appForm.value.age,
+          userHeight: this.appForm.value.height,
+          userWeight: this.appForm.value.weight
         }
 
-        this.postServ.createUser(user);
+        this.userSer.createUser(user);
       }
       
       this.router.navigate(['/posts']);
     }, errorMessage => {
       this.isEroosMasege = true;
       this.error = errorMessage;
-      this.authServ.logout();
     })
     
     console.log(this.appForm);
