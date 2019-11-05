@@ -1,5 +1,9 @@
 <div class="creat-post">
     <div class="container">
+        <div class="searche">
+            <input class="search" type="text" (input)="onSearch($event.target.value)">
+        </div>
+
         <form class="form" [formGroup] ="appForm" (ngSubmit)="onSubmit()">
             <div class="form-control">
                 <div>

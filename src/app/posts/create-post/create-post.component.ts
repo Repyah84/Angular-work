@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostsService, Post } from '../post.seervice';
 import { Router } from '@angular/router';
+import { CreatePostService } from './create-post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -14,6 +15,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor(
     private postServ: PostsService,
+    private createPostServ: CreatePostService,
     private router: Router
   ) {}
 
@@ -32,5 +34,13 @@ export class CreatePostComponent implements OnInit {
     this.postServ.makePost(post);
     this.appForm.reset();
     this.router.navigate(['/posts']);
+  }
+
+
+  onSearch(value: string){
+    this.createPostServ.searcheItem(value)
+      .subscribe(item => {
+        console.log(item)
+      })
   }
 }
