@@ -13,6 +13,8 @@ import { UserService, AuthRsponceData, initUser} from '../user.service';
 })
 export class UserLogComponent implements OnInit {
 
+  selectValue = '';
+
   appForm: FormGroup;
 
   error: string = '';
@@ -41,7 +43,9 @@ export class UserLogComponent implements OnInit {
       'user-name': new FormControl('User', Validators.required),
       'age': new FormControl(null),
       'height': new FormControl(null),
-      'weight': new FormControl(null)
+      'weight': new FormControl(null),
+      'select-height': new FormControl('inches'),
+      'select-weight': new FormControl('pounds')
     })
 
   }
@@ -77,8 +81,8 @@ export class UserLogComponent implements OnInit {
           userId: this.userSer.userId,
           userName: this.appForm.value['user-name'],
           userAge: this.appForm.value.age,
-          userHeight: this.appForm.value.height,
-          userWeight: this.appForm.value.weight
+          userHeight: `${this.appForm.value.height}  ${this.appForm.value['select-height']}`,
+          userWeight: `${this.appForm.value.weight}  ${this.appForm.value['select-weight']}`
         }
 
         this.userSer.createUser(user);

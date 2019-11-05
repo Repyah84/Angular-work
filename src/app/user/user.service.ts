@@ -10,8 +10,8 @@ export interface initUser {
     userId: string,
     userName: string,
     userAge?: number,
-    userHeight?: number,
-    userWeight?: number,
+    userHeight?: string,
+    userWeight?: string,
     id?: string
 }
 

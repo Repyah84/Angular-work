@@ -29,6 +29,8 @@ export class UserComponent implements OnInit {
       'age': new FormControl(null, Validators.required),
       'height': new FormControl(null, Validators.required),
       'weight': new FormControl(null, [Validators.required]),
+      'select-height': new FormControl('inches'),
+      'select-weight': new FormControl('pounds')
     })
 
   }
@@ -44,8 +46,8 @@ export class UserComponent implements OnInit {
         userId: this.userInfo.userId,
         userName: this.appForm.value.name,
         userAge: this.appForm.value.age,
-        userHeight: this.appForm.value.height,
-        userWeight: this.appForm.value.weight,
+        userHeight: `${this.appForm.value.height}  ${this.appForm.value['select-height']}`,
+        userWeight: `${this.appForm.value.weight}  ${this.appForm.value['select-weight']}`,
         id: this.userInfo.id
       }
 

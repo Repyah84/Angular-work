@@ -25,7 +25,13 @@
               <label for="height">Height: {{ userInfo?.userHeight }}</label>
               <span>Same Text</span>
             </div>
-            <input *ngIf="btnValue !== 'Change'" type="number" id="height" name="height" formControlName="height">
+            <div class="form-select">
+              <input class="form-height" *ngIf="btnValue !== 'Change'" type="number" id="height" name="height" formControlName="height">
+              <select *ngIf="btnValue !== 'Change'"  class="select" name="select-height" formControlName="select-height">
+                  <option value="inches">inches</option>
+                  <option value="centimeters">centimeters</option>
+              </select>
+          </div>
           </div>
 
           <div class="form-control">
@@ -33,7 +39,13 @@
               <label for="weight">Weight: {{ userInfo?.userWeight  }}</label>
               <span>Same Text</span>
             </div>
-            <input *ngIf="btnValue !== 'Change'" type="number" id="weight" name="weight" formControlName="weight">
+            <div class="form-select">
+              <input class="form-weight" *ngIf="btnValue !== 'Change'" type="number" id="weight" name="weight" formControlName="weight">
+              <select *ngIf="btnValue !== 'Change'"  class="select" name="select-weight" formControlName="select-weight">
+                  <option value="pounds">pounds</option>
+                  <option value="kilograms">kilograms</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-btn">
