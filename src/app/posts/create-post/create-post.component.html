@@ -1,7 +1,36 @@
 <div class="creat-post">
     <div class="container">
         <div class="searche">
-            <input class="search" type="text" (input)="onSearch($event.target.value)">
+            <input #inNput class="search" type="text" (input)="onSearch($event.target.value)">
+        </div>
+
+        <div class="search-container" *ngIf="itemsSearch.length > 0">
+            <div class="search-food" *ngFor="let food of itemsSearch" (click)="onClick(food.foodName)">
+                <div >
+                    <img class="img" [src]="food.imege">
+                </div>
+                <div class="food-name">
+                    <p>{{ food.foodName }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="shou-foods" *ngIf="showFoods.length > 0">
+            <div class="shou-food" *ngFor="let inFood of showFoods">
+                <div >
+                    <img class="img" [src]="inFood.imege">
+                </div>
+                <div class="food-name">
+                    <p>{{ inFood.foodName }}</p>
+                </div>
+                <div class="btn-block">
+                    <button class="btn">-</button>
+                    <button class="btn">+</button>
+                    <div class="calories">
+                        <p>{{ inFood.calories }} calories</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <form class="form" [formGroup] ="appForm" (ngSubmit)="onSubmit()">

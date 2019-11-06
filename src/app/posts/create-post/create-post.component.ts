@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostsService, Post } from '../post.seervice';
 import { Router } from '@angular/router';
-import { CreatePostService } from './create-post.service';
+import { CreatePostService, initProduct } from './create-post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -11,7 +11,14 @@ import { CreatePostService } from './create-post.service';
 })
 export class CreatePostComponent implements OnInit {
 
+  @ViewChild('inNput', {static: false}) input: ElementRef
+
   appForm: FormGroup;
+
+
+  itemsSearch: initProduct[] = [];
+
+  showFoods: initProduct[] = [];
 
   constructor(
     private postServ: PostsService,
@@ -38,12 +45,28 @@ export class CreatePostComponent implements OnInit {
 
 
   onSearch(value: string){
-    if(value.length === 0) return;
+    if(value.length === 0){
+      this.itemsSearch.length = 0;
+      return;
+    } 
+      
     this.createPostServ.ininSearche = true;
     this.createPostServ.searcheItem(value)
       .subscribe(item => {
-        console.log(item)
+        this.itemsSearch = item;
         this.createPostServ.ininSearche = false;  
+      })
+  }
+
+  onClick(fodName: string){
+
+    this.createPostServ.ininSearche = true;
+    this.createPostServ.getItem(fodName)
+      .subscribe(response => {
+        this.itemsSearch.length = 0;
+        this.input.nativeElement.value = '';
+        this.showFoods.push(response)
+        this.createPostServ.ininSearche = false;
       })
   }
 }

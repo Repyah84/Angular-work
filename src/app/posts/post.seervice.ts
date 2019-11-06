@@ -7,6 +7,14 @@ export interface Post {
     title: string,
     content: string,
     id?: string,
+    foods?: [
+        {
+            foodName: string;
+            imege: string;
+            id?: string;
+            calories?: number
+        }
+    ]
 }
 
 @Injectable({providedIn: 'root'})

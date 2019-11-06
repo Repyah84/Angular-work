@@ -3,6 +3,56 @@
    text-align: center;
 }
 
+
+.search-container{
+    overflow: auto;
+    max-height: 200px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.search-food{
+    display: flex;
+    border: 1px solid darkslategray;
+    margin: 5px 0;
+    cursor: pointer;
+
+    
+    &:hover{
+        border-color: blue;
+    }
+}
+
+
+.shou-foods{
+    max-width: 600px;
+    margin: 0 auto;
+
+    .shou-food{
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid darkslategray;
+    }
+
+}
+
+.img{
+    display: block;
+    max-width: 50px;
+}
+
+.food-name,
+.btn-block,
+.calories{
+    display: flex;
+    align-items: center;
+}
+
+.calories{
+    margin-left: 10px;
+}
+
 .form{
     max-width: 600px;
     margin: 0 auto;
@@ -30,4 +80,5 @@
     .btn{
         padding: 10px 30px;
     }
+
 }
