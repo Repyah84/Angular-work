@@ -38,9 +38,12 @@ export class CreatePostComponent implements OnInit {
 
 
   onSearch(value: string){
+    if(value.length === 0) return;
+    this.createPostServ.ininSearche = true;
     this.createPostServ.searcheItem(value)
       .subscribe(item => {
         console.log(item)
+        this.createPostServ.ininSearche = false;  
       })
   }
 }

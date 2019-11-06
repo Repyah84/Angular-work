@@ -33,11 +33,12 @@ export class PostsService {
         .pipe(
             map((response: any ) => {
                 console.log('!!!!!!!!!!!!!!!', response)
-                return {...post, id: response.name}})
-                )
-                .subscribe(post => {
-                    this.addPost(post);
-                });
+                return {...post, id: response.name}
+            })
+            )
+            .subscribe(post => {
+                this.addPost(post);
+            });
             }
 
 

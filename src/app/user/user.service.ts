@@ -158,7 +158,6 @@ export class UserService {
         )
 
         if(loadeUser.token){
-            console.log('LOAE_USER', this.userId)
             this.userId = userData.id;
             this.user.next(loadeUser);
             const expirationDuration = new Date(userData._tokenExpirationData).getTime() - new Date().getTime();
