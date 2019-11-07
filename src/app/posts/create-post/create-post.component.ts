@@ -16,7 +16,7 @@ export class CreatePostComponent implements OnInit {
 
   appForm: FormGroup;
 
-  calories 
+  allCalories = 0;
 
   itemsSearch: initProduct[] = [];
 
@@ -38,7 +38,9 @@ export class CreatePostComponent implements OnInit {
   onSubmit(){
     const post: Post = {
       title: this.appForm.value.title, 
-      content: this.appForm.value.content,
+      comment: this.appForm.value.content,
+      foods: this.showFoods,
+      allCalories: this.allCalories
     }
     this.postServ.makePost(post);
     this.appForm.reset();
@@ -60,7 +62,7 @@ export class CreatePostComponent implements OnInit {
       })
   }
 
-  onClick(fodName: string){
+  addFood(fodName: string){
 
     this.createPostServ.ininSearche = true;
     this.createPostServ.getItem(fodName)
@@ -68,6 +70,7 @@ export class CreatePostComponent implements OnInit {
         this.itemsSearch.length = 0;
         this.input.nativeElement.value = '';
         this.showFoods.push(response)
+        this.inAllCalories();
         this.createPostServ.ininSearche = false;
       })
   }
@@ -78,15 +81,23 @@ export class CreatePostComponent implements OnInit {
     const amount = this.showFoods[index].amount;
     const calories = this.showFoods[index].calories / amount;
     this.showFoods[index].calories = +(this.showFoods[index].calories - calories).toFixed(2);
-    this.showFoods[index].amount--
+    this.showFoods[index].amount--;
+    this.allCalories = +(this.allCalories - calories).toFixed(2);
   }
 
   onPlas(index: number){
     const amount = this.showFoods[index].amount;
     const calories = this.showFoods[index].calories / amount;
     this.showFoods[index].calories = +(this.showFoods[index].calories + calories).toFixed(2);
-    this.showFoods[index].amount++
+    this.showFoods[index].amount++;
+    this.allCalories = +(this.allCalories + calories).toFixed(2);
   }
 
+  inAllCalories(){
+    this.allCalories = 0;
+    this.showFoods.forEach(item => {
+      +(this.allCalories += item.calories).toFixed(2)
+    })
+  }
 
 }

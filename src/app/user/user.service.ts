@@ -128,7 +128,7 @@ export class UserService {
 
     onLogout(){
         this.user.next(null);
-        localStorage.removeItem('userData');
+        localStorage.clear();
         if(this._tokenExpirationTimer){
             clearTimeout(this._tokenExpirationTimer)
         }

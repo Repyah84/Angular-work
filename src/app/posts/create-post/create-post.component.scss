@@ -1,6 +1,8 @@
 
 .searche{
-   text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .input-search{
@@ -36,6 +38,33 @@
         border-bottom: 1px solid darkslategray;
     }
 
+}
+
+.imege-searche{
+    display: flex;
+    align-items: center;
+    transform: rotate(45deg);
+
+    &::before{
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid #808080;
+        border-radius: 50%;
+    }
+
+    &::after{
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 3px;
+        background: #808080;
+    }
+}
+
+.allCalories{
+    margin-top: 20px;
 }
 
 .img{

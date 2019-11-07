@@ -18,12 +18,26 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.post = this.postServ.getPost(params.id)
-    })
+    console.log(this.postServ.postsValue)
+    if(this.postServ.postsValue){
+      this.post = JSON.parse(localStorage.getItem('post'))
+    }
+    else{
+      this.route.params.subscribe((params: Params) => {
+        this.post = this.postServ.getPost(params.id)
+        localStorage.setItem('post', JSON.stringify(this.post))
+        console.log('POST!!!!!!!!!!', this.post)
+      })
+    }
+  }
+
+  onBackTopst(){
+    localStorage.removeItem('post');
+    this.router.navigate(['/posts']);
   }
 
   onDelite(id: string){
+    localStorage.removeItem('post');
     this.postServ.delitePost(id);
     this.router.navigate(['/posts']);
   }

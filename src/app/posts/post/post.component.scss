@@ -1,11 +1,24 @@
 .post{
-    background: seagreen;
+    // background: #B0E0E6;
+}
+
+.food{
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid darkmagenta;;
+
+    img{
+        display: block;
+        max-width: 50px;
+    }
 }
 
 .btn{
     color: #ffffff;
     padding: 10px;
-    background: cornflowerblue;
+    background: #F4A460;
 
     &-wraper{
         padding: 20px 0;

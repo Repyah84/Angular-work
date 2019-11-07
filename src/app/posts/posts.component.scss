@@ -1,11 +1,13 @@
 
 .post-link{
+    display: flex;
     background: #F4A460;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #696969;
 
     .a{
+        flex-grow: 1;
         outline: none;
         color: darkgreen;
     }

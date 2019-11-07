@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
+import { initProduct } from './create-post/create-post.service';
 
 export interface Post {
     title: string;
-    content: string;
+    comment: string;
     id?: string;
-    foods?: []
+    foods?: initProduct[];
+    allCalories?: number;
 }
 
 @Injectable({providedIn: 'root'})
@@ -33,14 +35,14 @@ export class PostsService {
         this.http.post<Post>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`, post)
         .pipe(
             map((response: any ) => {
-                console.log('!!!!!!!!!!!!!!!', response)
                 return {...post, id: response.name}
             })
             )
             .subscribe(post => {
+                console.log('!!!!!!!!!!!!!!!', post)
                 this.addPost(post);
             });
-            }
+    }
 
 
     
@@ -59,6 +61,7 @@ export class PostsService {
                 })
             )   
             .subscribe(response => {
+                console.log('RESPONSE_POST',response)
                 this.posts = response;
                 this.loadSpiner = false;
         })

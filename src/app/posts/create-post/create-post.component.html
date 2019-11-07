@@ -2,10 +2,11 @@
     <div class="container">
         <div class="searche">
             <input #inNput class="input-search" type="text" (input)="onSearch($event.target.value)">
+            <div class="imege-searche"></div>
         </div>
 
         <div class="search-container" *ngIf="itemsSearch.length > 0">
-            <div class="search-food" *ngFor="let food of itemsSearch" (click)="onClick(food.foodName)">
+            <div class="search-food" *ngFor="let food of itemsSearch" (click)="addFood(food.foodName)">
                 <div >
                     <img class="img" [src]="food.imege">
                 </div>
@@ -31,6 +32,9 @@
                 <div class="calories">
                     <p>{{ inFood.calories }} calories</p>
                 </div>
+            </div>
+            <div class="allCalories">
+                <p> All Calories | {{ allCalories }}</p>
             </div>
         </div>
 
