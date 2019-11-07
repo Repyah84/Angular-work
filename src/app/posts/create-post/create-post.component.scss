@@ -3,7 +3,9 @@
    text-align: center;
 }
 
-
+.input-search{
+    padding: 5px;
+}
 .search-container{
     overflow: auto;
     max-height: 200px;
@@ -17,7 +19,6 @@
     margin: 5px 0;
     cursor: pointer;
 
-    
     &:hover{
         border-color: blue;
     }
@@ -40,6 +41,14 @@
 .img{
     display: block;
     max-width: 50px;
+}
+
+.btn-samm{
+    font-size: 30px;
+    background: transparent;
+}
+.btn-minus{
+    padding-bottom: 7px;
 }
 
 .food-name,

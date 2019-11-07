@@ -1,7 +1,7 @@
 <div class="creat-post">
     <div class="container">
         <div class="searche">
-            <input #inNput class="search" type="text" (input)="onSearch($event.target.value)">
+            <input #inNput class="input-search" type="text" (input)="onSearch($event.target.value)">
         </div>
 
         <div class="search-container" *ngIf="itemsSearch.length > 0">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="shou-foods" *ngIf="showFoods.length > 0">
-            <div class="shou-food" *ngFor="let inFood of showFoods">
+            <div class="shou-food" *ngFor="let inFood of showFoods; let index = index">
                 <div >
                     <img class="img" [src]="inFood.imege">
                 </div>
@@ -24,11 +24,12 @@
                     <p>{{ inFood.foodName }}</p>
                 </div>
                 <div class="btn-block">
-                    <button class="btn">-</button>
-                    <button class="btn">+</button>
-                    <div class="calories">
-                        <p>{{ inFood.calories }} calories</p>
-                    </div>
+                    <button class="btn btn-samm btn-minus" [disabled]="inFood.amount === 1" (click)="onMinus(index)">-</button>
+                    <span> {{ inFood.amount }} </span>
+                    <button class="btn btn-samm btn-plas" (click)="onPlas(index)">+</button>
+                </div>
+                <div class="calories">
+                    <p>{{ inFood.calories }} calories</p>
                 </div>
             </div>
         </div>

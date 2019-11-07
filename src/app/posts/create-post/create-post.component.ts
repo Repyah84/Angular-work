@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PostsService, Post } from '../post.seervice';
 import { Router } from '@angular/router';
+
+import { PostsService, Post } from '../post.seervice';
 import { CreatePostService, initProduct } from './create-post.service';
 
 @Component({
@@ -11,10 +12,11 @@ import { CreatePostService, initProduct } from './create-post.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  @ViewChild('inNput', {static: false}) input: ElementRef
+  @ViewChild('inNput', {static: false}) input: ElementRef;
 
   appForm: FormGroup;
 
+  calories 
 
   itemsSearch: initProduct[] = [];
 
@@ -40,12 +42,12 @@ export class CreatePostComponent implements OnInit {
     }
     this.postServ.makePost(post);
     this.appForm.reset();
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/posts'])
   }
 
 
   onSearch(value: string){
-    if(value.length === 0){
+    if(!value){
       this.itemsSearch.length = 0;
       return;
     } 
@@ -69,4 +71,22 @@ export class CreatePostComponent implements OnInit {
         this.createPostServ.ininSearche = false;
       })
   }
+
+
+  onMinus(index: number){
+    if(this.showFoods[index].amount === 1) return;
+    const amount = this.showFoods[index].amount;
+    const calories = this.showFoods[index].calories / amount;
+    this.showFoods[index].calories = +(this.showFoods[index].calories - calories).toFixed(2);
+    this.showFoods[index].amount--
+  }
+
+  onPlas(index: number){
+    const amount = this.showFoods[index].amount;
+    const calories = this.showFoods[index].calories / amount;
+    this.showFoods[index].calories = +(this.showFoods[index].calories + calories).toFixed(2);
+    this.showFoods[index].amount++
+  }
+
+
 }

@@ -7,7 +7,8 @@ export class initProduct {
     foodName: string;
     imege: string;
     id?: string;
-    calories?: number
+    calories?: number;
+    amount?: number
 }
 
 @Injectable({providedIn: 'root'})
@@ -70,7 +71,8 @@ export class CreatePostService {
                             return food = {
                                 foodName: responseFood.food_name,
                                 imege: responseFood.photo.thumb,
-                                calories: +responseFood.nf_calories
+                                calories: +responseFood.nf_calories,
+                                amount: 1
                             }
                         })
                         return food

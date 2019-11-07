@@ -4,17 +4,10 @@ import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 
 export interface Post {
-    title: string,
-    content: string,
-    id?: string,
-    foods?: [
-        {
-            foodName: string;
-            imege: string;
-            id?: string;
-            calories?: number
-        }
-    ]
+    title: string;
+    content: string;
+    id?: string;
+    foods?: []
 }
 
 @Injectable({providedIn: 'root'})
