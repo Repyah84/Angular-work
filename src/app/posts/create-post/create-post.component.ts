@@ -36,11 +36,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit(){
+    if(!this.appForm.valid) return
     const post: Post = {
       title: this.appForm.value.title, 
       comment: this.appForm.value.content,
       foods: this.showFoods,
-      allCalories: this.allCalories
+      allCalories: this.allCalories,
+      date: new Date()
     }
     this.postServ.makePost(post);
     this.appForm.reset();

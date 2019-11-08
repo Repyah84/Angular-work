@@ -8,7 +8,7 @@ export class initProduct {
     imege: string;
     id?: string;
     calories?: number;
-    amount?: number
+    amount?: number;
 }
 
 @Injectable({providedIn: 'root'})
@@ -41,7 +41,6 @@ export class CreatePostService {
                                     id: responseFoods.tag_id
                                 }
                             )
-                            return foodsArrey
                         })
                         return foodsArrey
                     }
@@ -68,7 +67,7 @@ export class CreatePostService {
                 for(const key in rsponseFood){
                     if(key === 'foods'){
                         rsponseFood[key].map(responseFood => {
-                            return food = {
+                            food = {
                                 foodName: responseFood.food_name,
                                 imege: responseFood.photo.thumb,
                                 calories: +responseFood.nf_calories,
