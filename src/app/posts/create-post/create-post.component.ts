@@ -31,7 +31,7 @@ export class CreatePostComponent implements OnInit {
   ngOnInit() {
     this.appForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
-      'content': new FormControl(null, Validators.required)
+      'comment': new FormControl(null, Validators.required)
     })
   }
 

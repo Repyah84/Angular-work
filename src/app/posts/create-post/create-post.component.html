@@ -49,10 +49,10 @@
 
             <div class="form-control">
                 <div>
-                    <label for="content">Content</label>
-                    <span *ngIf="!appForm.get('content').valid && appForm.get('content').touched">NOT Content</span>
+                    <label for="comment">Comment</label>
+                    <span *ngIf="!appForm.get('comment').valid && appForm.get('comment').touched">NOT comment</span>
                 </div>
-                <textarea type="text" id="content" name="content" formControlName="content"></textarea>
+                <textarea rows="4" type="text" id="comment" name="comment" formControlName="comment"></textarea>
             </div>
 
             <div class="form-btn">
