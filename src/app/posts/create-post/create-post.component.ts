@@ -39,7 +39,7 @@ export class CreatePostComponent implements OnInit {
     if(!this.appForm.valid) return
     const post: Post = {
       title: this.appForm.value.title, 
-      comment: this.appForm.value.content,
+      comment: this.appForm.value.comment,
       foods: this.showFoods,
       allCalories: this.allCalories,
       date: new Date()

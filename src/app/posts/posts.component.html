@@ -1,20 +1,25 @@
 <div class="posts">
     <span *ngIf="postsServ.loadSpiner">Loading...</span>
     <div *ngIf="!postsServ.loadSpiner" class="container">
-        <div class="post-link" *ngFor="let item of postsServ.posts; let index = index">
-            <a class="a" [routerLink]="['/post', item.id]">
-                <h2>{{ item.title }}</h2>
-                <div class="foods" *ngFor="let food of item.foods">
-                    <p>{{ food.foodName }} | {{ food.amount }}</p>
+        <div class="post" *ngFor="let item of postsServ.posts; let index = index">
+            <div class="post-date">
+                <h3>{{ item.date | date: 'EEEE/ MMMM d/ y/ h:mm a' }}</h3>
+                <div class="post-btn">
+                    <button class="btn btn-delite" (click)="onDelitePOst(item.id)">Delite Post</button>
                 </div>
-                <h3>All Calories | {{ item.allCalories  }}</h3>
-              <div *ngIf="item.comment">
-                  <h2>Comment</h2>
-                  <p>{{ item.comment }}</p>
-              </div>
-            </a>
-            <div class="post-btn">
-                <button class="btn btn-delite" (click)="onDelite(item.id)">Delite Post</button>
+            </div>
+            <div class="post-link">
+                <a class="a" [routerLink]="['/post', item.id]">
+                    <h2>{{ item.title }}</h2>
+                    <div class="foods" *ngFor="let food of item.foods">
+                        <p>{{ food.foodName }} | {{ food.amount }}</p>
+                    </div>
+                    <h3>All Calories | {{ item.allCalories  }}</h3>
+                  <div *ngIf="item.comment">
+                      <h2>Comment</h2>
+                      <p>{{ item.comment }}</p>
+                  </div>
+                </a>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit{
     }
   }
 
-  onDelite(id: string){
+  onDelitePOst(id: string){
     this.postsServ.delitePost(id)
   }
 

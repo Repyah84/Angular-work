@@ -1,6 +1,5 @@
 
-.post-link{
-    display: flex;
+.post{
     background: #F4A460;
     padding: 10px;
     margin-bottom: 10px;
@@ -12,6 +11,13 @@
         color: darkgreen;
     }
     
+}
+
+.post-date{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #000000;;
 }
 
 .btn-delite{
