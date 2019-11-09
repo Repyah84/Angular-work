@@ -1,7 +1,8 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpParams } from '@angular/common/http';
-import { UserService } from '../user/user.service';
 import { take, exhaustMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+
+import { UserService } from '../user/user.service';
 import { CreatePostService } from '../posts/create-post/create-post.service';
 
 
