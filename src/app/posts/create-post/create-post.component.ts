@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { PostsService, Post } from '../post.seervice';
+import { PostsService, Post } from '../posts.service';
 import { CreatePostService, initProduct } from './create-post.service';
 
 @Component({

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { PostsService } from '../../posts/post.seervice';
+import { PostsService } from '../../posts/posts.service';
 import { UserService, AuthRsponceData, initUser} from '../user.service';
 
 @Component({
