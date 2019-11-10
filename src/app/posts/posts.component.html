@@ -1,6 +1,7 @@
 <div class="posts">
     <span *ngIf="postsServ.loadSpiner">Loading...</span>
     <div *ngIf="!postsServ.loadSpiner" class="container">
+        <span *ngIf="postsServ.posts.length === 0">You dont have posts !</span>
         <div class="post" *ngFor="let item of postsServ.posts; let index = index">
             <div class="post-date">
                 <h3>{{ item.date | date: 'EEEE/ MMMM d/ y/ h:mm a' }}</h3>
@@ -14,11 +15,10 @@
                     <div class="foods" *ngFor="let food of item.foods">
                         <p>{{ food.foodName }} | {{ food.amount }}</p>
                     </div>
-                    <h3>All Calories | {{ item.allCalories  }}</h3>
-                  <div *ngIf="item.comment">
-                      <h2>Comment</h2>
-                      <p>{{ item.comment }}</p>
-                  </div>
+                    <h3>All Calories | {{ item.allCalories }}</h3>
+                    <div *ngIf="item.comment">
+                        <p>{{ item.comment }}</p>
+                    </div>
                 </a>
             </div>
         </div>

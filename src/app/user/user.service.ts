@@ -39,8 +39,6 @@ export class UserService {
         private router: Router,
     ){}
 
-    
-
 
     createUser(user: initUser, userId = this.userId ){
         this.http.post<initUser>(`https://angular-progect.firebaseio.com/USER_${userId}/user_info.json`, user)
@@ -48,8 +46,6 @@ export class UserService {
             console.log(response)
         })
     }
-
-
 
     
     getUserInfo(userId = this.userId){
@@ -67,6 +63,7 @@ export class UserService {
             )
     }
 
+
     updateUserInfo(user: initUser, userId = this.userId, id: string){
         return this.http.put(`https://angular-progect.firebaseio.com/USER_${userId}/user_info/${id}.json`, user)
             .pipe(
@@ -75,7 +72,6 @@ export class UserService {
                })
             )
     }
-
 
 
     onSingUp(email: string, password: string){
@@ -100,8 +96,6 @@ export class UserService {
     }
 
 
-
-
     onLogin(email: string, password: string){
         return this.http.post<AuthRsponceData>(
             'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCgXrwXWurZ4z7eWUqi1zo6NppyznPkLTo',
@@ -124,8 +118,6 @@ export class UserService {
     }
 
 
-
-
     onLogout(){
         this.user.next(null);
         localStorage.clear();
@@ -135,7 +127,6 @@ export class UserService {
 
         this._tokenExpirationTimer = null;
     }
-
 
 
     autoLogin(){
@@ -166,14 +157,12 @@ export class UserService {
     }
 
 
-
     autoLogout(expirationDuration: number){
         this._tokenExpirationTimer = setTimeout(() => {
             this.onLogout();
             this.router.navigate(['/user-log'])
         }, expirationDuration);
     }
-
 
 
     private hendlerAutonotification(
@@ -191,24 +180,22 @@ export class UserService {
     }
 
 
-    
-
     private handlerError(errorRes: HttpErrorResponse){
         let errorMessage = 'An unknown error ccured';
-                if(!errorRes.error || !errorRes.error.error){
-                    return errorMessage
-                }
-                switch(errorRes.error.error.message){
-                    case 'EMAIL_EXISTS':
-                        errorMessage = 'This email exist olready';
-                        break;
-                    case 'EMAIL_NOT_FOUND':
-                        errorMessage = 'This email does not exist';
-                        break;
-                    case 'INVALID_PASSWORD':
-                        errorMessage = 'This password is not correct';
-                        break;
-                }
-            return throwError(errorMessage)
+            if(!errorRes.error || !errorRes.error.error){
+                return errorMessage
+            }
+            switch(errorRes.error.error.message){
+                case 'EMAIL_EXISTS':
+                    errorMessage = 'This email exist olready';
+                    break;
+                case 'EMAIL_NOT_FOUND':
+                    errorMessage = 'This email does not exist';
+                    break;
+                case 'INVALID_PASSWORD':
+                    errorMessage = 'This password is not correct';
+                    break;
+            }
+        return throwError(errorMessage)
     }
 }

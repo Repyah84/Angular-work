@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+import { Post} from '../posts.service';
+import { UserService } from '../../user/user.service';
+
 
 export class initProduct {
     foodName: string;
@@ -16,7 +19,10 @@ export class CreatePostService {
 
     ininSearche = false;
 
-    constructor(private http: HttpClient){}
+    constructor(
+        private http: HttpClient,
+        private userServ: UserService
+        ){}
 
     searcheItem(value: string){
 
@@ -77,6 +83,16 @@ export class CreatePostService {
                         return food
                     }
                 }
+            })
+        )
+    }
+
+
+    createPost(post: Post, userId = this.userServ.userId){
+        return this.http.post<Post>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`, post)
+        .pipe(
+            map((response: any ) => {
+                return {...post, id: response.name}
             })
         )
     }

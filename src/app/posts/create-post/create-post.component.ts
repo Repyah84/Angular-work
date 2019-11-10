@@ -35,8 +35,9 @@ export class CreatePostComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onCreatePost(){
     if(!this.appForm.valid) return
+
     const post: Post = {
       title: this.appForm.value.title, 
       comment: this.appForm.value.comment,
@@ -44,7 +45,12 @@ export class CreatePostComponent implements OnInit {
       allCalories: this.allCalories,
       date: new Date()
     }
-    this.postServ.makePost(post);
+    this.createPostServ.createPost(post)
+      .subscribe(post => {
+        console.log('!!!!!!!!!!!!!!!', post)
+        this.postServ.addPost(post);
+    });
+    
     this.appForm.reset();
     this.router.navigate(['/posts'])
   }
@@ -65,7 +71,6 @@ export class CreatePostComponent implements OnInit {
   }
 
   addFood(fodName: string){
-
     this.createPostServ.ininSearche = true;
     this.createPostServ.getItem(fodName)
       .subscribe(response => {
@@ -80,6 +85,7 @@ export class CreatePostComponent implements OnInit {
 
   onMinus(index: number){
     if(this.showFoods[index].amount === 1) return;
+
     const amount = this.showFoods[index].amount;
     const calories = this.showFoods[index].calories / amount;
     this.showFoods[index].calories = +(this.showFoods[index].calories - calories).toFixed(2);

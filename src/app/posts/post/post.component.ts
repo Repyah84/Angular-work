@@ -31,12 +31,12 @@ export class PostComponent implements OnInit {
     }
   }
 
-  onBackTopst(){
+  onBackToPosts(){
     localStorage.removeItem('post');
     this.router.navigate(['/posts']);
   }
 
-  onDelite(id: string){
+  onDelitePost(id: string){
     localStorage.removeItem('post');
     this.postServ.delitePost(id);
     this.router.navigate(['/posts']);

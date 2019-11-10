@@ -30,27 +30,10 @@ export class PostsService {
         private userServ: UserService
     ){}
 
-
-    
-    
-    makePost(post: Post, userId = this.userServ.userId){
-        this.http.post<Post>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`, post)
-        .pipe(
-            map((response: any ) => {
-                return {...post, id: response.name}
-            })
-            )
-            .subscribe(post => {
-                console.log('!!!!!!!!!!!!!!!', post)
-                this.addPost(post);
-            });
-    }
-
-
     
     loadPosts(userId = this.userServ.userId){
         this.loadSpiner = true;
-        this.http.get<{[key: string]: Post}>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`)
+        return this.http.get<{[key: string]: Post}>(`https://angular-progect.firebaseio.com/USER_${userId}/posts.json`)
             .pipe(
                 map(responsePost => {
                     const arreyPosts: Post[] = [];
@@ -63,7 +46,7 @@ export class PostsService {
                 })
             )   
             .subscribe(response => {
-                console.log('RESPONSE_POST',response)
+                console.log('RESPONSE_POSTS',response)
                 this.posts = response;
                 this.loadSpiner = false;
         })
@@ -78,7 +61,6 @@ export class PostsService {
             this.posts.splice(deliteElem, 1);
         })
     }
-
 
 
     
