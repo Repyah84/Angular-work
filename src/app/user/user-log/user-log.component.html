@@ -19,7 +19,7 @@
                 </div>
                 <input type="password" id="password" name="password" formControlName="password">
             </div>
-
+            
             <div *ngIf="!isLoginMode" class="user-sing-up">
                 <div class="form-control">
                     <div>
@@ -48,7 +48,7 @@
                         </select>
                     </div>
                 </div>
-        
+                
                 <div class="form-control">
                     <div>
                         <label for="weight">Weight: {{'Weight'}}</label>
@@ -69,11 +69,10 @@
                 (click)="isLoginMode = !isLoginMode"
                 >{{ isLoginMode ? 'To Sing Up' : 'To Login' }}</button>
             </div>
-            <div class="soc" *ngIf="!isLoginMode">
+            <div class="soc">
                 <button class="btn btn-google" type="button" (click)="userSer.googleSingUp()">Google Log</button>
                 <button class="btn btn-fasebook" type="button" (click)="userSer.facebookSingUp()">Fasebook Log</button>
             </div>
         </form>
     </div>
-
 </div>

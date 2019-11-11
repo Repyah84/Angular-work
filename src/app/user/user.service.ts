@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
-import { throwError, BehaviorSubject, Observable } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -43,12 +43,9 @@ export class UserService {
     ){}
 
 
-
-
     async facebookSingUp() {
         const provider = new auth.FacebookAuthProvider();
         const credential: any = await this.afAuth.auth.signInWithPopup(provider);
-        console.log('USER$_RESPONSE', credential.user);
         const teme = 3600;
         const user: initUser = {
             userId: credential.user.uid,
@@ -60,22 +57,25 @@ export class UserService {
             credential.user.ma,
             teme
         )
-
-        this.createUser(user, credential.uid)
-            .subscribe(() => {
-                this.router.navigate(['/posts'])
+        this.getUserInfo(credential.user.uid)
+            .subscribe(response => {
+                if(!response){
+                    this.createUser(user, credential.user.uid)
+                        .subscribe(() => {
+                            this.router.navigate(['/posts'])
+                        })
+                }else{
+                    this.router.navigate(['/posts'])
+                }
             })
     }
 
     
-
-
     async googleSingUp() {
         const provider = new auth.GoogleAuthProvider();
         const credential: any = await this.afAuth.auth.signInWithPopup(provider);
-        // const creAuth: any = await this.afAuth.auth.getRedirectResult()
-        // console.log('AUTHHHHH', creAuth.user);
         console.log('USER$_RESPONSE', credential.user);
+
         const teme = 3600;
         const user: initUser = {
             userId: credential.user.uid,
@@ -88,10 +88,18 @@ export class UserService {
             teme
         )
 
-        this.createUser(user, credential.uid)
-            .subscribe(() => {
-                this.router.navigate(['/posts'])
+        this.getUserInfo(credential.user.uid)
+            .subscribe(response => {
+                if(!response){
+                    this.createUser(user, credential.user.uid)
+                        .subscribe(() => {
+                            this.router.navigate(['/posts'])
+                        })
+                }else{
+                    this.router.navigate(['/posts'])
+                }
             })
+              
     }
 
 
@@ -158,7 +166,7 @@ export class UserService {
                 returnSecureToken: true
             }
         ).pipe(
-            catchError(this.handlerError), 
+            catchError(this.handlerError),
             tap((resData: any) => {
                 console.log('RESPONSE_DATA', resData)
                 this.hendlerAutonotification(

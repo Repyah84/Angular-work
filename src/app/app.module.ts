@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
@@ -15,6 +15,9 @@ import { UserLogComponent } from './user/user-log/user-log.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { UserInterceptor } from './auth/user-interceptor.servise';
 import { environment } from '../environments/environment';
+import { SentryErrorHandler } from './sentry.service';
+
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,10 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule,
   ],
   providers: [
+    {
+      provide: ErrorHandler,
+      useClass: SentryErrorHandler
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,

@@ -53,8 +53,11 @@ span{
 }
 
 .soc{
-    display: flex;
-    justify-content: space-between;
+    .btn{
+        display: block;
+        margin-top: 15px;
+        width: 100%;
+    }
 
     .btn-google{
         background :#DC143C;

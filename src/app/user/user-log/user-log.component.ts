@@ -89,7 +89,6 @@ export class UserLogComponent implements OnInit {
             this.router.navigate(['/posts'])
           });
       }else{
-
         this.router.navigate(['/posts']);
       }
       
