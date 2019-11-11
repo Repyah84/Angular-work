@@ -31,6 +31,7 @@ export class UserLogComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.userSer.onLogout();
 
     if(!this.postServ.postsValue){
@@ -51,9 +52,7 @@ export class UserLogComponent implements OnInit {
   }
 
 
-
-
-  onSubmit(){
+  initUser(){
     if(!this.appForm.valid) return
 
     console.log(this.isLoginMode);
@@ -85,10 +84,16 @@ export class UserLogComponent implements OnInit {
           userWeight: `${this.appForm.value.weight}  ${this.appForm.value['select-weight']}`
         }
 
-        this.userSer.createUser(user);
+        this.userSer.createUser(user)
+          .subscribe(() => {
+            this.router.navigate(['/posts'])
+          });
+      }else{
+
+        this.router.navigate(['/posts']);
       }
       
-      this.router.navigate(['/posts']);
+
     }, errorMessage => {
       this.isEroosMasege = true;
       this.error = errorMessage;

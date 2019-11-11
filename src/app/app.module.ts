@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +13,8 @@ import { PostComponent } from './posts/post/post.component';
 import { UserComponent } from './user/user.component';
 import { UserLogComponent } from './user/user-log/user-log.component';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
-import { UserInterceptor } from './auth/user-unterceptor.servise';
+import { UserInterceptor } from './auth/user-interceptor.servise';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { UserInterceptor } from './auth/user-unterceptor.servise';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.fierbase),
+    AngularFireAuthModule,
   ],
   providers: [
     {

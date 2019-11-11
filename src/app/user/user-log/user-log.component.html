@@ -3,7 +3,7 @@
         <div class="error-massege" *ngIf="isEroosMasege">
             <h3>{{error}}</h3>
         </div>
-        <form [formGroup]="appForm" (ngSubmit)="onSubmit()" class="form" >
+        <form [formGroup]="appForm" (ngSubmit)="initUser()" class="form" >
             <div class="form-control">
                 <div>
                     <label for="email">Email</label>
@@ -64,11 +64,16 @@
             </div>
             <div class="form-btn">
                 <button type="submit" class="btn btn-login" 
-                    >{{ isLoginMode ? 'Login' : 'Sing up' }}</button>
+                >{{ isLoginMode ? 'Login' : 'Sing up' }}</button>
                 <button type="button" class="btn btn-login-module" 
-                    (click)="isLoginMode = !isLoginMode"
-                    >{{ isLoginMode ? 'To Sing Up' : 'To Login' }}</button>
+                (click)="isLoginMode = !isLoginMode"
+                >{{ isLoginMode ? 'To Sing Up' : 'To Login' }}</button>
+            </div>
+            <div class="soc" *ngIf="!isLoginMode">
+                <button class="btn btn-google" type="button" (click)="userSer.googleSingUp()">Google Log</button>
+                <button class="btn btn-fasebook" type="button" (click)="userSer.facebookSingUp()">Fasebook Log</button>
             </div>
         </form>
     </div>
+
 </div>
