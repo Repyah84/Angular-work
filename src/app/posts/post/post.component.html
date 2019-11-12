@@ -1,7 +1,7 @@
 <div class="post">
     <div class="container">
         <h3>{{ post.title }}</h3>
-        <div class="foods" *ngFor="let food of post.foods">
+        <div class="foods" *ngFor="let food of post.foods; let index = undex">
             <h3>{{ food.foodName }}</h3>
             <div class="food">
                 <img class="img" [src]="food.imege">

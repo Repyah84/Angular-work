@@ -70,6 +70,12 @@ export class CreatePostComponent implements OnInit {
       })
   }
 
+
+  onDeliteItem(index: number){
+    this.showFoods.splice(index, 1);
+    this.inAllCalories()
+  }
+
   addFood(fodName: string){
     this.createPostServ.ininSearche = true;
     this.createPostServ.getItem(fodName)

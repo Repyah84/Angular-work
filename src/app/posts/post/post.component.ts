@@ -36,6 +36,7 @@ export class PostComponent implements OnInit {
     this.router.navigate(['/posts']);
   }
 
+
   onDelitePost(id: string){
     localStorage.removeItem('post');
     this.postServ.delitePost(id);

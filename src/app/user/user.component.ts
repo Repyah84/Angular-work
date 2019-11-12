@@ -25,10 +25,10 @@ export class UserComponent implements OnInit {
     })    
     
     this.appForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'age': new FormControl(null, Validators.required),
-      'height': new FormControl(null, Validators.required),
-      'weight': new FormControl(null, [Validators.required]),
+      'name': new FormControl(null,),
+      'age': new FormControl(null,),
+      'height': new FormControl(null,),
+      'weight': new FormControl(null),
       'select-height': new FormControl('inches'),
       'select-weight': new FormControl('pounds')
     })
@@ -36,11 +36,12 @@ export class UserComponent implements OnInit {
   }
 
 
-  onSubmit(){
+  initUserInfo(){
 
     if(this.btnValue === 'Change'){
       this.btnValue = 'Save'
     }else{
+
     
       const userInfoUbdate: initUser = {
         userId: this.userInfo.userId,
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
             userWeight: responseUserInfo.userWeight,
             id: responseUserInfo.id
           }
-          this.appForm.reset()
+          // this.appForm.reset()
         })
 
       this.btnValue = 'Change';
