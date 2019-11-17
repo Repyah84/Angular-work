@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit{
-  userUnSub : Subscription;
+export class PostsComponent implements OnInit {
+  userUnSub: Subscription;
 
   loadPosts = true;
 
@@ -18,14 +18,14 @@ export class PostsComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    if(this.postsServ.postsValue){
+    if (this.postsServ.postsValue) {
       this.postsServ.getLoadPosts();
       this.postsServ.loadPosts();
     }
   }
 
-  onDelitePOst(id: string){
-    this.postsServ.delitePost(id)
+  onDelitePOst(id: string) {
+    this.postsServ.delitePost(id);
   }
 
 }

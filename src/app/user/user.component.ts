@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { UserService, initUser } from './user.service';
+import { UserService, InitUser } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -14,43 +14,43 @@ export class UserComponent implements OnInit {
 
   btnValue = 'Change';
 
-  userInfo: initUser;
-  
+  userInfo: InitUser;
+
   constructor(private userServ: UserService) {}
-  
+
   ngOnInit() {
 
     this.userServ.getUserInfo().subscribe(responseUser => {
       this.userInfo = responseUser;
-    })    
-    
+    });
+
     this.appForm = new FormGroup({
-      'name': new FormControl(null,),
-      'age': new FormControl(null,),
-      'height': new FormControl(null,),
-      'weight': new FormControl(null),
+      name: new FormControl(null),
+      age: new FormControl(null),
+      height: new FormControl(null),
+      weight: new FormControl(null),
       'select-height': new FormControl('inches'),
       'select-weight': new FormControl('pounds')
-    })
+    });
 
   }
 
 
-  initUserInfo(){
+  initUserInfo() {
 
-    if(this.btnValue === 'Change'){
-      this.btnValue = 'Save'
-    }else{
+    if (this.btnValue === 'Change') {
+      this.btnValue = 'Save';
+    } else {
 
-    
-      const userInfoUbdate: initUser = {
+
+      const userInfoUbdate: InitUser = {
         userId: this.userInfo.userId,
         userName: this.appForm.value.name,
         userAge: this.appForm.value.age,
         userHeight: `${this.appForm.value.height}  ${this.appForm.value['select-height']}`,
         userWeight: `${this.appForm.value.weight}  ${this.appForm.value['select-weight']}`,
         id: this.userInfo.id
-      }
+      };
 
       this.userServ.updateUserInfo(userInfoUbdate, this.userInfo.userId, this.userInfo.id)
         .subscribe(responseUserInfo => {
@@ -61,9 +61,9 @@ export class UserComponent implements OnInit {
             userHeight: responseUserInfo.userHeight,
             userWeight: responseUserInfo.userWeight,
             id: responseUserInfo.id
-          }
+          };
           // this.appForm.reset()
-        })
+        });
 
       this.btnValue = 'Change';
     }

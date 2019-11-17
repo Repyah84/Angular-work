@@ -8,7 +8,6 @@ import { PostsComponent } from './posts/posts.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 
-
 const routes: Routes = [
   {path: '', redirectTo: '/user-log', pathMatch: 'full'},
   {path: 'posts', component: PostsComponent, canActivate: [AuthGuard]},
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   {path: 'user-log', component: UserLogComponent},
-
 ];
 
 @NgModule({

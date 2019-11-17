@@ -14,25 +14,25 @@ export class UserInterceptor implements HttpInterceptor {
     constructor(
         private userServ: UserService,
         private crestePosrServe: CreatePostService
-        ){}
+        ) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler){
-        if(this.crestePosrServe.ininSearche){
+    intercept(req: HttpRequest<any>, next: HttpHandler) {
+        if (this.crestePosrServe.ininSearche) {
             return next.handle(req);
         }
         return this.userServ.user.pipe(
             take(1),
             exhaustMap(user => {
-                if(!user){
-                    return next.handle(req)
+                if (!user) {
+                    return next.handle(req);
                 }
                 const modifayRec = req.clone({
                     params: new HttpParams().set('auth', user.token)
-                })
-                return next.handle(modifayRec)
+                });
+                return next.handle(modifayRec);
             })
-        )
-        
+        );
+
     }
 
 }

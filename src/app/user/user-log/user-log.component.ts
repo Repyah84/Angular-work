@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { PostsService } from '../../posts/posts.service';
-import { UserService, AuthRsponceData, initUser} from '../user.service';
+import { UserService, AuthRsponceData, InitUser} from '../user.service';
 
 @Component({
   selector: 'app-user-log',
@@ -17,7 +17,7 @@ export class UserLogComponent implements OnInit {
 
   appForm: FormGroup;
 
-  error: string = '';
+  error = '';
 
   isEroosMasege = false;
 
@@ -34,38 +34,38 @@ export class UserLogComponent implements OnInit {
 
     this.userSer.onLogout();
 
-    if(!this.postServ.postsValue){
-      this.postServ.getLoadPosts()
+    if (!this.postServ.postsValue) {
+      this.postServ.getLoadPosts();
     }
 
     this.appForm = new FormGroup({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       'user-name': new FormControl('User', Validators.required),
-      'age': new FormControl(null),
-      'height': new FormControl(null),
-      'weight': new FormControl(null),
+      age: new FormControl(null),
+      height: new FormControl(null),
+      weight: new FormControl(null),
       'select-height': new FormControl('inches'),
       'select-weight': new FormControl('pounds')
-    })
+    });
 
   }
 
 
-  initUser(){
-    if(!this.appForm.valid) return
+  initUser() {
+    if (!this.appForm.valid) { return; }
 
     console.log(this.isLoginMode);
 
     const email = this.appForm.value.email;
     const password = this.appForm.value.password;
-    
+
     let authOs: Observable<string | AuthRsponceData>;
 
-    
-    if(this.isLoginMode){
+
+    if (this.isLoginMode) {
       authOs = this.userSer.onLogin(email, password);
-    }else{
+    } else {
       authOs = this.userSer.onSingUp(email, password);
     }
 
@@ -75,31 +75,39 @@ export class UserLogComponent implements OnInit {
 
       this.isEroosMasege = false;
 
-      if(!this.isLoginMode){
-        const user: initUser = {
+      if (!this.isLoginMode) {
+        const user: InitUser = {
           userId: this.userSer.userId,
           userName: this.appForm.value['user-name'],
           userAge: this.appForm.value.age,
           userHeight: `${this.appForm.value.height}  ${this.appForm.value['select-height']}`,
           userWeight: `${this.appForm.value.weight}  ${this.appForm.value['select-weight']}`
-        }
+        };
 
         this.userSer.createUser(user)
           .subscribe(() => {
-            this.router.navigate(['/posts'])
+            this.router.navigate(['/posts']);
           });
-      }else{
+      } else {
         this.router.navigate(['/posts']);
       }
-      
+
 
     }, errorMessage => {
       this.isEroosMasege = true;
       this.error = errorMessage;
-    })
-    
+    });
+
     console.log(this.appForm);
 
+  }
+
+  googleLog() {
+    this.userSer.googleSingUp();
+  }
+
+  fasebookLog() {
+    this.userSer.facebookSingUp();
   }
 
 }

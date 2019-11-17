@@ -1,9 +1,9 @@
-import { ErrorHandler, Injectable } from "@angular/core";
+import { ErrorHandler, Injectable } from '@angular/core';
 
-import * as Sentry from "@sentry/browser";
+import * as Sentry from '@sentry/browser';
 
 Sentry.init({
-  dsn: "https://eb98e86db46e43d6b408568bb2ccc0ea@sentry.io/1815557"
+  dsn: 'https://eb98e86db46e43d6b408568bb2ccc0ea@sentry.io/1815557'
 });
 
 @Injectable({providedIn: 'root'})

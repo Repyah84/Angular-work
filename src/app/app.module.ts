@@ -18,7 +18,6 @@ import { environment } from '../environments/environment';
 import { SentryErrorHandler } from './sentry.service';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +27,6 @@ import { SentryErrorHandler } from './sentry.service';
     UserComponent,
     UserLogComponent,
     CreatePostComponent,
-
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { PostsService, Post } from '../posts.service';
-import { CreatePostService, initProduct } from './create-post.service';
+import { CreatePostService, InitProduct } from './create-post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -18,9 +18,9 @@ export class CreatePostComponent implements OnInit {
 
   allCalories = 0;
 
-  itemsSearch: initProduct[] = [];
+  itemsSearch: InitProduct[] = [];
 
-  showFoods: initProduct[] = [];
+  showFoods: InitProduct[] = [];
 
   constructor(
     private postServ: PostsService,
@@ -30,67 +30,69 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.appForm = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'comment': new FormControl(null, Validators.required)
-    })
+      title: new FormControl(null, Validators.required),
+      comment: new FormControl(null, Validators.required)
+    });
   }
 
-  onCreatePost(){
-    if(!this.appForm.valid) return
+  onCreatePost() {
+    if (!this.appForm.valid) {
+      return;
+    }
 
     const post: Post = {
-      title: this.appForm.value.title, 
+      title: this.appForm.value.title,
       comment: this.appForm.value.comment,
       foods: this.showFoods,
       allCalories: this.allCalories,
       date: new Date()
-    }
+    };
     this.createPostServ.createPost(post)
       .subscribe(post => {
-        console.log('!!!!!!!!!!!!!!!', post)
+        console.log('!!!!!!!!!!!!!!!', post);
         this.postServ.addPost(post);
     });
-    
+
     this.appForm.reset();
-    this.router.navigate(['/posts'])
+    this.router.navigate(['/posts']);
   }
 
 
-  onSearch(value: string){
-    if(!value){
+  onSearch(value: string) {
+    if (!value) {
       this.itemsSearch.length = 0;
       return;
-    } 
-      
+    }
+
     this.createPostServ.ininSearche = true;
     this.createPostServ.searcheItem(value)
       .subscribe(item => {
         this.itemsSearch = item;
-        this.createPostServ.ininSearche = false;  
-      })
+        this.createPostServ.ininSearche = false;
+      });
   }
 
 
-  onDeliteItem(index: number){
+  onDeliteItem(index: number) {
     this.showFoods.splice(index, 1);
-    this.inAllCalories()
+    this.inAllCalories();
   }
 
-  addFood(fodName: string){
+  addFood(fodName: string) {
     this.createPostServ.ininSearche = true;
     this.createPostServ.getItem(fodName)
       .subscribe(response => {
         this.itemsSearch.length = 0;
         this.input.nativeElement.value = '';
-        this.showFoods.push(response)
+        this.showFoods.push(response);
         this.inAllCalories();
         this.createPostServ.ininSearche = false;
-      })
+      });
   }
 
 
-  onMinus(index: number){
-    if(this.showFoods[index].amount === 1) return;
+  onMinus(index: number) {
+    if (this.showFoods[index].amount === 1) { return; }
 
     const amount = this.showFoods[index].amount;
     const calories = this.showFoods[index].calories / amount;
@@ -99,7 +101,7 @@ export class CreatePostComponent implements OnInit {
     this.allCalories = +(this.allCalories - calories).toFixed(2);
   }
 
-  onPlas(index: number){
+  onPlas(index: number) {
     const amount = this.showFoods[index].amount;
     const calories = this.showFoods[index].calories / amount;
     this.showFoods[index].calories = +(this.showFoods[index].calories + calories).toFixed(2);
@@ -107,11 +109,12 @@ export class CreatePostComponent implements OnInit {
     this.allCalories = +(this.allCalories + calories).toFixed(2);
   }
 
-  inAllCalories(){
+  inAllCalories() {
     this.allCalories = 0;
     this.showFoods.forEach(item => {
-      +(this.allCalories += item.calories).toFixed(2)
-    })
+      // tslint:disable-next-line:no-unused-expression
+      +(this.allCalories += item.calories).toFixed(2);
+    });
   }
 
 }

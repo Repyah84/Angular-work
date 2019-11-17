@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class PostComponent implements OnInit {
 
-  post: Post
+  post: Post;
 
   constructor(
     private postServ: PostsService,
@@ -18,26 +18,25 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.postServ.postsValue)
-    if(this.postServ.postsValue){
-      this.post = JSON.parse(localStorage.getItem('post'))
-    }
-    else{
+    console.log(this.postServ.postsValue);
+    if (this.postServ.postsValue) {
+      this.post = JSON.parse(localStorage.getItem('post'));
+    } else {
       this.route.params.subscribe((params: Params) => {
-        this.post = this.postServ.getPost(params.id)
-        localStorage.setItem('post', JSON.stringify(this.post))
-        console.log('POST!!!!!!!!!!', this.post)
-      })
+        this.post = this.postServ.getPost(params.id);
+        localStorage.setItem('post', JSON.stringify(this.post));
+        console.log('POST!!!!!!!!!!', this.post);
+      });
     }
   }
 
-  onBackToPosts(){
+  onBackToPosts() {
     localStorage.removeItem('post');
     this.router.navigate(['/posts']);
   }
 
 
-  onDelitePost(id: string){
+  onDelitePost(id: string) {
     localStorage.removeItem('post');
     this.postServ.delitePost(id);
     this.router.navigate(['/posts']);
